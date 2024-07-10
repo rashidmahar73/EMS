@@ -1,0 +1,83 @@
+.eventsConfirmation {
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 20px;
+  .subContainer {
+    background-color: rgb(99, 211, 65);
+    border-top-left-radius: 10px;
+    .heading {
+      font-size: 60px;
+      font-weight: 700;
+      text-align: center;
+      color: white;
+    }
+    .icon {
+      display: flex;
+      justify-content: center;
+    }
+    .messageParent {
+      display: ruby-text;
+      width: 100%;
+      .message {
+        border-radius: 5px;
+        background-color: white;
+        padding: 3px;
+        font-size: 20px;
+        font-weight: 700;
+        text-align: center;
+        color: rgb(99, 211, 65);
+        margin: 10px 0px;
+      }
+    }
+  }
+
+  .detailsWrapper {
+    background-color: rgb(236, 236, 236);
+    padding: 10px;
+    border-bottom-right-radius: 10px;
+    .eventHeading {
+      color: #006ab3;
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0px 0px;
+      text-decoration: underline rgb(99, 211, 65);
+    }
+
+    .detailsContainer {
+      .text {
+        font-size: 15px;
+        font-weight: 500;
+        span {
+          font-size: 13px;
+          font-weight: 700;
+        }
+      }
+      .thankyouMessage {
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .lookForward {
+        font-size: 15px;
+      }
+    }
+    .btnParent {
+      margin: 10px 0px;
+      display: flex;
+      justify-content: center;
+      .backToEvents {
+        width: 160px;
+        height: 40px;
+        border: none;
+        background-color: rgb(119, 214, 90);
+        font-size: 18px;
+        font-weight: 700;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        &:hover {
+          background-color: rgb(161, 218, 144);
+        }
+      }
+    }
+  }
+}
