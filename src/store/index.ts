@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import type { eventType, userTypes } from './types'
 
 // Create a new store instance.
 const store = createStore({
@@ -10,10 +11,10 @@ const store = createStore({
     }
   },
   mutations: {
-    addEvent(state: any, user: any) {
+    addEvent(state: any, user: eventType) {
       state.selectedEvent = { ...user }
     },
-    addCurrentUser(state: any, user: any) {
+    addCurrentUser(state: any, user: userTypes) {
       state.currentUser = { ...user }
     },
     bookedEvent(state: any, user: any) {

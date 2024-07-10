@@ -1,44 +1,54 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, reactive } from 'vue'
 import router from '@/router'
 import store from '@/store'
 import { CarouselView, NavbarView, SpinnerView } from '@/components'
-import type { eventData, eventsResponseType } from './types'
 import { ApiHandler, truncateText } from '@/utils'
-import styles from './styles.module.scss'
 import { dummyData } from './helpers'
+import type { eventData, eventsResponseType } from './types'
+import styles from './styles.module.scss'
 
-// // Define the events data
-const events = ref(dummyData)
+//  Define the dummy events data
+// const events = ref(dummyData)
 
-// const events = ref<eventData[]>([])
+const events = ref<eventData[]>([])
+const isLoading = reactive({
+  loading: false
+})
+
 // Log the events data when the component is mounted
 
 onMounted(async () => {
-  // const params = {
-  //   query: 'Concerts in San Francisco',
-  //   date: 'any',
-  //   is_virtual: 'false',
-  //   start: '0'
-  // }
-  // const response = await ApiHandler({
-  //   method: 'GET',
-  //   url: 'search-events',
-  //   params: params
-  // })
-  // const eventsList = response?.data?.data?.map((item: eventsResponseType, index: number) => {
-  //   const copyItem = { ...item }
-  //   return {
-  //     id: index,
-  //     eventName: copyItem?.name,
-  //     date: copyItem?.start_time?.split(' ')?.[0],
-  //     location: copyItem?.venue?.full_address,
-  //     thumbnail: copyItem?.thumbnail
-  //   }
-  // })
-  // events.value = eventsList || []
+  isLoading.loading = true
+  const params = {
+    query: 'Concerts in San Francisco',
+    date: 'any',
+    is_virtual: 'false',
+    start: '0'
+  }
+  // api call
+  const response = await ApiHandler({
+    method: 'GET',
+    url: 'search-events',
+    params: params
+  })
+  // modify the data
+  const eventsList = response?.data?.data?.map((item: eventsResponseType, index: number) => {
+    const copyItem = { ...item }
+    return {
+      id: index,
+      eventName: copyItem?.name,
+      date: copyItem?.start_time?.split(' ')?.[0],
+      location: copyItem?.venue?.full_address,
+      thumbnail: copyItem?.thumbnail
+    }
+  })
+  // event data
+  events.value = eventsList || []
+  isLoading.loading = false
 })
 function registrationHandler(event: eventData) {
+  // vuex store state event details object added
   store.commit('addEvent', event)
   return router.push('/registrationForm')
 }
@@ -52,7 +62,7 @@ function registrationHandler(event: eventData) {
       <h1 :class="styles.heading">Upcoming Events</h1>
     </div>
     <div>
-      <SpinnerView :isTrue="events?.length === 0 || !events" />
+      <SpinnerView :isTrue="isLoading.loading" />
       <div :class="styles.eventListContainer">
         <div :class="styles.eventChildContainer" v-for="event in events" :key="event.id">
           <img :class="styles.eventImage" :src="event.thumbnail" alt="thumbail" />

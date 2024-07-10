@@ -16,15 +16,18 @@ let isUserSubmitted = false
 
 const registerUser = () => {
   isUserSubmitted = true
+  // user input below
   const data = {
     username: username.value,
     email: email.value,
     phoneNumber: phoneNumber.value
   }
 
+  // store states data
   const selectedEvent = store.state.selectedEvent
   let bookedEvent = store.state.bookedEvent
 
+  // No SelectedEvent then first selectEvent to proceed
   if (Object.keys(selectedEvent)?.length <= 0) {
     setTimeout(() => {
       message.value = ''
@@ -35,7 +38,10 @@ const registerUser = () => {
     return
   }
   // Find index of user in bookedEvent array
-  const userIndex = bookedEvent.findIndex((user: any) => user?.username === data?.username)
+  const userIndex = bookedEvent.findIndex(
+    (user: { username: string; email: string }) =>
+      user?.username === data?.username && user?.email === data?.email
+  )
 
   if (userIndex !== -1) {
     // User exists, update their booked events
@@ -67,7 +73,6 @@ const registerUser = () => {
 setTimeout(() => {
   isUserSubmitted = false
 }, 1000)
-console.log(message.value, 'home')
 </script>
 
 <template>

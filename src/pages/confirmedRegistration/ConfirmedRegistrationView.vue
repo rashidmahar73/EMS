@@ -3,8 +3,8 @@ import { computed } from 'vue'
 import router from '@/router'
 import store from '@/store'
 import { TickIcon } from '@/assets/icons'
-import styles from './styles.module.scss'
 import { truncateText } from '@/utils'
+import styles from './styles.module.scss'
 
 const currentUser = computed(() => store.state.currentUser)
 const selectedEvent = computed(() => store.state.selectedEvent)
@@ -28,7 +28,6 @@ const backToEvents = () => {
       <h1 :class="styles.eventHeading">Event Details</h1>
       <div :class="styles.detailsContainer" v-for="event in [currentUser]" :key="event?.username">
         <h2 :class="styles.text"><span>Attendee Name :</span> {{ event?.username }}</h2>
-        <h1 :class="styles.thankyouMessage">Thank you for registering for this event.</h1>
         <p :class="styles.text"><span>Attendee Email :</span> {{ event?.email }}</p>
         <p :class="styles.text"><span>Phone Number :</span> {{ event?.phoneNumber }}</p>
         <div v-for="ev in [selectedEvent]" :key="ev?.id">
@@ -38,6 +37,7 @@ const backToEvents = () => {
             <span>Event Location :</span> {{ truncateText(ev?.location, 50) }}
           </p>
         </div>
+        <h1 :class="styles.thankyouMessage">Thank you for registering for this event.</h1>
         <h1 :class="styles.lookForward">We look forward to seeing you at the event.</h1>
       </div>
       <div :class="styles.btnParent">

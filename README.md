@@ -65,3 +65,25 @@ The `index.ts` file centralizes the import of utility functions and components:
 ## `SCSS` Usage
 
 Used Module Based Styling because in simple scss files the class will be overwrite from DOM:
+
+## `MOCK API` Usage
+
+Taken Api from RapidApi Platform. RapidApi Basic plan is subscribed which allow 50 hits per month on one account.
+
+If the testing is still pending then use the dummy data which is in helpers.ts
+
+## `Use Case` Usage
+
+Register Events if the user already register with event. IF that same user again add a new event then it will be under that user.
+
+If the user is new the seperate data structure will be created.
+
+To check whether already user existed just implement the check on username and email. So be aware right the same user name and email to add second event with that same user.
+
+## `.env` Usage
+
+dotEnv added for environment variables which includes base url and key.
+
+## `vueX persistance` Usage
+
+vueX persistance have not been applied.
